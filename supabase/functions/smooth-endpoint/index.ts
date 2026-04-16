@@ -13,75 +13,50 @@ serve(async (req) => {
   try {
     const { messages } = await req.json();
     
-    const API_KEY = Deno.env.get("GROQ_API_KEY") || Deno.env.get("LOVABLE_API_KEY");
-    if (!API_KEY) throw new Error("API Key is missing");
+    // سحب مفتاح جيمناي من الـ Secrets
+    const GEMINI_API_KEY = Deno.env.get("GEMINI_API_KEY");
+    if (!GEMINI_API_KEY) throw new Error("Gemini API Key is missing");
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-      {
-        auth: {
-          persistSession: false,
-          autoRefreshToken: false,
-          detectSessionInUrl: false
-        }
-      }
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // جلب الإحصائيات (RPC)
-    const { data: statsData, error: dbError } = await supabase.rpc('get_book_activity_stats');
-    if (dbError) throw dbError;
+    // جلب البيانات والإحصائيات
+    const { data: statsData } = await supabase.rpc('get_book_activity_stats');
+    const { data: booksMetadata } = await supabase.from("books").select("id, title, author, category, year");
 
-    // جلب بيانات الكتب
-    const { data: booksMetadata, error: booksError } = await supabase
-      .from("books")
-      .select("id, title, author, category, year");
-    if (booksError) throw booksError;
-
-    // --- تحسين سياق البيانات لتقليل "الغباء" في الرد ---
     const booksContext = booksMetadata?.map((book: any) => {
       const stats = statsData?.find((s: any) => s.book_id === book.id);
-      return `[ID: ${book.id} | ${book.title} | ${book.category} | تحميلات: ${stats?.downloads || 0} | تقييم: ${stats?.rating ? Number(stats.rating).toFixed(1) : 0}]`;
+      return `[${book.title} | ${book.category} | تحميلات: ${stats?.downloads || 0} | تقييم: ${stats?.rating || 0}]`;
     }).join("\n");
 
-    const systemPrompt = `أنت "مساعد مكتبة IQ الذكي"، نظام خبير لدعم اتخاذ القرار بقسم علوم المعلومات - جامعة بني سويف.
+    const systemPrompt = `أنت "مساعد مكتبة IQ الذكي" لجامعة بني سويف. استخدم البيانات التالية للرد: \n${booksContext}\n أجب بالعربية الفصحى، نسق ردك بـ Markdown، واختر أفضل 3 كتب فقط.`;
 
-### بيانات المكتبة الحالية:
-${booksContext}
+    // تحويل الرسائل لتنسيق Gemini (Content-based)
+    const contents = messages.map((m: any) => ({
+      role: m.role === "assistant" ? "model" : "user",
+      parts: [{ text: m.content }]
+    }));
 
-### قواعد الرد (مهم جداً):
-1. **الاختيار الذكي:** لا تعرض كل الكتب أبداً. اختر أفضل 3 رسائل فقط تناسب سؤال المستخدم.
-2. **تحليل البيانات:** إذا كان الكتاب له تحميلات عالية، قل للمستخدم: "هذا الكتاب هو الأكثر طلباً بناءً على نشاط الباحثين".
-3. **التنسيق:** استخدم Markdown الاحترافي:
-   - العناوين (##) للترحيب.
-   - القوائم النقطية لعرض الكتب.
-   - الخط العريض **لأسماء الرسائل**.
-4. **اللغة:** العربية الفصحى الأكاديمية فقط.
-5. **التقييم:** استخدم النجوم (⭐) لوصف التقييمات.`;
-
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    // نداء API جيمناي (Flash 1.5 - سريع ومجاني)
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
       method: "POST",
-      headers: { 
-        "Authorization": `Bearer ${API_KEY}`, 
-        "Content-Type": "application/json" 
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [{ role: "system", content: systemPrompt }, ...messages],
-        temperature: 0.5, // تقليل الحرارة لردود أكثر دقة
-        max_tokens: 1500,
+        contents: [{ role: "user", parts: [{ text: systemPrompt }]}, ...contents],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1000 }
       }),
     });
 
     const result = await response.json();
-    const aiReply = result.choices?.[0]?.message?.content || "عذراً، واجهت مشكلة في معالجة طلبك حالياً.";
+    const aiReply = result.candidates?.[0]?.content?.parts?.[0]?.text || "عذراً، حدث خطأ في الاتصال بجيمناي.";
 
     return new Response(JSON.stringify({ reply: aiReply }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
 
   } catch (e) {
-    console.error("Function Error:", e.message);
     return new Response(JSON.stringify({ error: e.message }), { 
       status: 500, 
       headers: { ...corsHeaders, "Content-Type": "application/json" } 

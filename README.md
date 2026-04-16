@@ -15,6 +15,6 @@ Deployment: Vercel
 المساعد الذكي: شات بوت مدعوم بالذكاء الاصطناعي لمساعدة الباحثين.
 إدارة الخدمات: تنظيم الإعارة، الوصول الرقمي، والرسائل العلمية.
 💻 طريقة التشغيل محلياً
-git clone https://github.com/simofire78-wq/Library-AI-BeniSuef.git
+git clone https://github.com/simofire78-wq/Library-BeniSuef.git
 npm install
 npm run dev
