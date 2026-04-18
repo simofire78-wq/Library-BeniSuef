@@ -33,7 +33,16 @@ export default function Announcements() {
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-10">
-
+ <div 
+  className="fixed inset-0 z-0 pointer-events-none opacity-30 dark:opacity-20"
+  style={{
+    backgroundImage: `url('https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2000&auto=format&fit=crop')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    filter: 'blur(3px) grayscale(30%)' //  إضافة التغبيش وتقليل الألوان شوية
+  }}
+/>
       {/* Hero */}
       <div className="rounded-2xl bg-gradient-to-bl from-primary/15 via-primary/5 to-background border border-primary/20 p-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

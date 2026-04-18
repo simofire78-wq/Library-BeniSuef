@@ -1,71 +1,76 @@
-import { GraduationCap, Users, Heart, Facebook, Info, ShieldCheck } from 'lucide-react';
+import { GraduationCap, Users, Heart, ShieldCheck } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="bg-slate-50 dark:bg-[#0b1120] border-t border-border mt-20 transition-colors duration-300" dir="rtl">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <footer 
+    className="mt-20 bg-gradient-to-t from-slate-100 via-slate-100 to-transparent dark:from-slate-950 dark:via-slate-950 dark:to-transparent pt-20 transition-colors duration-300 relative z-10" 
+    dir="rtl"
+  >
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           
-          {/* العمود الأول: نبذة ذكية عن المشروع */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="bg-primary p-1.5 rounded-lg">
-                <ShieldCheck className="h-5 w-5 text-white" />
+          {/* العمود الأول: الهوية بوضوح عالي */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="bg-primary p-2 rounded-lg shadow-lg">
+                <ShieldCheck className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-primary">منصة IS-Insights | بصيرة المعلومات</h3>
+              <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white leading-none">
+                IS-Insights
+                <span className="block text-sm font-medium text-primary mt-1">بصيرة المعلومات</span>
+              </h3>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed text-justify">
-              أول بوابة رقمية ذكية لقسم علوم المعلومات بجامعة بني سويف. يرتكز المشروع على "توظيف أدوات الذكاء الاصطناعي وتحليل البيانات في دعم اتخاذ القرار لمؤسسات المعلومات"، من خلال تقديم مساعد ذكي (IQ Assistant) ولوحات تحكم تحليلية شاملة لمؤشرات الاستخدام والتقييم.
+            <p className="text-[15px] text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+              أول بوابة رقمية ذكية لقسم علوم المعلومات بجامعة بني سويف، لتوظيف الذكاء الاصطناعي وتحليل البيانات في دعم القرار.
             </p>
           </div>
 
-          {/* العمود الثاني: فريق التطوير (8 طلاب) */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-bold">تيم تطوير المشروع</h3>
-            </div>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-muted-foreground">
-              <span className="font-bold text-foreground">إسلام ربيع (تيم ليدر)</span>
-              <span>أحمد حسين</span>
-              <span>مريم محمد</span>
-              <span>روان سليمان</span>
-              <span>شيماء ربيع</span>
-              <span>دعاء عطية</span>
-              <span>مريم حمدي</span>
-              <span>غادة عبد الحميد</span>
+          {/* العمود الثاني: فريق التطوير منظم */}
+          <div className="space-y-6">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2 border-r-4 border-primary pr-3">
+               فريق التطوير
+            </h3>
+            <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+              <span className="text-primary font-bold text-sm underline decoration-primary/30 underline-offset-4">إسلام ربيع (Leader)</span>
+              <span className="text-slate-600 dark:text-slate-400 text-sm font-semibold">أحمد حسين</span>
+              <span className="text-slate-600 dark:text-slate-400 text-sm font-semibold">مريم محمد</span>
+              <span className="text-slate-600 dark:text-slate-400 text-sm font-semibold">روان سليمان</span>
+              <span className="text-slate-600 dark:text-slate-400 text-sm font-semibold">شيماء ربيع</span>
+              <span className="text-slate-600 dark:text-slate-400 text-sm font-semibold">دعاء عطية</span>
+              <span className="text-slate-600 dark:text-slate-400 text-sm font-semibold">مريم حمدي</span>
+              <span className="text-slate-600 dark:text-slate-400 text-sm font-semibold">غادة عبد الحميد</span>
             </div>
           </div>
 
           {/* العمود الثالث: الإشراف العلمي */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <GraduationCap className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-bold">تحت إشراف</h3>
+          <div className="space-y-6">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2 border-r-4 border-primary pr-3">
+               تحت إشراف
+            </h3>
+            <div className="space-y-5">
+              <div className="flex flex-col bg-white/50 dark:bg-white/5 p-3 rounded-md border border-slate-200 dark:border-slate-800">
+                <span className="text-sm font-bold text-slate-900 dark:text-white">د/ وسام الوكيل</span>
+                <span className="text-xs text-primary font-medium">عضو هيئة التدريس بالقسم</span>
+              </div>
+              <div className="flex flex-col bg-white/50 dark:bg-white/5 p-3 rounded-md border border-slate-200 dark:border-slate-800">
+                <span className="text-sm font-bold text-slate-900 dark:text-white">د/ أميرة محمد</span>
+                <span className="text-xs text-primary font-medium">عضو هيئة التدريس بالقسم</span>
+              </div>
             </div>
-            <ul className="space-y-4">
-              <li className="flex flex-col border-r-2 border-primary/20 pr-3">
-                <span className="text-sm font-bold text-foreground">د/ وسام الوكيل</span>
-                <span className="text-[11px] text-muted-foreground italic">دكتور بقسم علوم المعلومات</span>
-              </li>
-              <li className="flex flex-col border-r-2 border-primary/20 pr-3">
-                <span className="text-sm font-bold text-foreground">د/ اميرة محمد</span>
-                <span className="text-[11px] text-muted-foreground italic">دكتور بقسم علوم المعلومات</span>
-              </li>
-            </ul>
           </div>
-
         </div>
 
-        {/* الجزء السفلي: تفاصيل المؤسسة */}
-        <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-muted-foreground flex items-center gap-1 font-medium">
-            صنع بكل <Heart className="h-3 w-3 text-red-500 fill-red-500" /> ضمن مشروع تخرج دفعة 2026
+        {/* الجزء السفلي: الحقوق */}
+        <div className="border-t border-slate-200 dark:border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-sm font-bold text-slate-500 flex items-center gap-2 bg-slate-200/50 dark:bg-slate-900 px-4 py-2 rounded-full">
+             مشروع تخرج دفعة 2026 <Heart className="h-4 w-4 text-red-500 fill-red-500 animate-pulse" />
           </p>
-          <div className="flex items-center gap-6 text-[11px] text-muted-foreground font-bold">
-            <span className="hover:text-primary transition-colors">جامعة بني سويف</span>
-            <span className="hover:text-primary transition-colors">كلية الآداب</span>
-            <span className="hover:text-primary transition-colors">قسم علوم المعلومات</span>
+          <div className="flex flex-wrap justify-center gap-4 text-xs font-black uppercase tracking-widest text-slate-400">
+            <span>جامعة بني سويف</span>
+            <span className="text-primary">•</span>
+            <span>كلية الآداب</span>
+            <span className="text-primary">•</span>
+            <span>قسم علوم المعلومات</span>
           </div>
         </div>
       </div>

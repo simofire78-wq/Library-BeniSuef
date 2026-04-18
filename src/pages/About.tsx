@@ -41,6 +41,17 @@ export default function About() {
 
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-12">
+      <div 
+  className="fixed inset-0 z-0 pointer-events-none opacity-30 dark:opacity-20"
+  style={{
+    backgroundImage: `url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000&auto=format&fit=crop')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    filter: 'blur(4px) grayscale(30%)' // 👈 إضافة التغبيش وتقليل الألوان شوية
+  }}
+/>
+      
 
       {/* Hero */}
       <div className="rounded-2xl bg-gradient-to-bl from-primary/15 via-primary/5 to-background border border-primary/20 p-8">
@@ -130,78 +141,6 @@ export default function About() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Staff Section - Large Image Cards with Colorize Effect */}
-      <div className="rounded-2xl border border-border bg-card p-8">
-        <div className="flex items-center gap-3 mb-10">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md">
-            <Users className="h-6 w-6" />
-          </div>
-          <h2 className="text-2xl font-bold text-foreground">القامات الأكاديمية والفريق الإداري</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-          {staff.map((member, index) => (
-            <motion.div 
-              key={member.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }} // يبدأ الأنيميشن لما يظهر 30% من الكارت
-              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.215, 0.61, 0.355, 1] }}
-              whileHover={{ y: -15, transition: { duration: 0.25 } }}
-              className="flex flex-col items-center text-center rounded-3xl border border-border bg-background p-6 hover:border-primary/40 
-                         hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 group cursor-pointer"
-            >
-              {/* الصورة الكبيرة مع تأثير الأبيض والأسود/الألوان */}
-              <div className="w-40 h-40 rounded-full border-8 border-primary/10 group-hover:border-primary/20 
-                              shadow-xl relative overflow-hidden mb-6 transition-all duration-300">
-                {member.image_url ? (
-                  <img
-                    src={member.image_url}
-                    alt={member.name}
-                    className="w-full h-full rounded-full object-cover transition-all duration-500 
-                               grayscale group-hover:grayscale-0 scale-100 group-hover:scale-110"
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center rounded-full bg-primary/10 
-                                  text-primary text-4xl font-bold grayscale group-hover:grayscale-0">
-                    {member.name.split(' ').map(w => w[0]).slice(0, 2).join('')}
-                  </div>
-                )}
-                {/* تأثير "وميض" خفيف عند الهوفر */}
-                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
-              </div>
-
-              {/* المعلومات الأساسية */}
-              <div className="space-y-2 relative z-10 w-full">
-                <p className="font-extrabold text-lg text-foreground group-hover:text-primary transition-colors line-clamp-2 min-h-[3.5rem] flex items-center justify-center px-2">
-                  {member.name}
-                </p>
-                
-                <p className="text-xs font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full inline-block">
-                  {member.role}
-                </p>
-                
-                {member.specialization && (
-                  <p className="text-sm text-muted-foreground mt-3 line-clamp-2 min-h-[2.5rem] italic">
-                    {member.specialization}
-                  </p>
-                )}
-              </div>
-
-              {/* البريد الإلكتروني بشكل شيك */}
-              {member.email && (
-                <div className="border-t border-border mt-5 pt-4 w-full text-center">
-                  <a href={`mailto:${member.email}`} className="text-xs text-muted-foreground hover:text-primary flex items-center gap-1.5 justify-center transition-colors">
-                    <Mail className="h-3.5 w-3.5" />
-                    <span className="truncate">{member.email}</span>
-                  </a>
-                </div>
-              )}
-            </motion.div>
-          ))}
         </div>
       </div>
 

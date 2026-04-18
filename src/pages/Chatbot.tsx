@@ -67,6 +67,16 @@ export default function Chatbot() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-4rem)] max-w-4xl mx-auto border rounded-lg bg-background shadow-sm overflow-hidden">
+       <div 
+  className="fixed inset-0 z-0 pointer-events-none opacity-30 dark:opacity-20"
+  style={{
+    backgroundImage: `url('https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2000&auto=format&fit=crop')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    filter: 'blur(3px) grayscale(30%)' //  إضافة التغبيش وتقليل الألوان شوية
+  }}
+/>
       {/* Header */}
       <div className="border-b px-6 py-4 flex items-center justify-between bg-muted/30">
         <div className="flex items-center gap-3">

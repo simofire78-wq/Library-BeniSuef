@@ -100,6 +100,16 @@ export default function Profile() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
+       <div 
+  className="fixed inset-0 z-0 pointer-events-none opacity-30 dark:opacity-20"
+  style={{
+    backgroundImage: `url('https://images.unsplash.com/photo-1568667256549-094345857637?q=80&w=2000&auto=format&fit=crop')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    filter: 'blur(3px) grayscale(30%)' //  إضافة التغبيش وتقليل الألوان شوية
+  }}
+/>
       {/* Profile Header */}
       <div className="rounded-2xl border border-border bg-card p-6">
         <div className="flex items-start justify-between">

@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { TopNavbar } from '@/components/TopNavbar';
 import { Footer } from '@/components/Footer'; // 1. استيراد الفوتر هنا
 import Index from './pages/Index';
+import ResetPassword from './pages/ResetPassword';
 import Search from './pages/Search';
 import Dashboard from './pages/Dashboard';
 import Chatbot from './pages/Chatbot';
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/services" element={<Services />} />
               <Route path="/news" element={<News />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/announcements" element={<Announcements />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/admin" element={<Admin />} />

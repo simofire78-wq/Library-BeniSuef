@@ -31,7 +31,31 @@ export default function Index() {
   const topBooks = books ? getTopBooksByViews(books, 10) : [];
 
   return (
-    <div className="p-6 max-w-7xl mx-auto space-y-12">
+    <div className="relative min-h-screen">
+     {/* 🖼️ خلفية ذكية: واضحة في الفاتح وعميقة في الغامق */}
+<div className="fixed inset-0 z-0 pointer-events-none">
+  <div 
+    className="absolute inset-0 transition-all duration-500
+               opacity-[0.35] grayscale-[30%] contrast-[1.1] blur-[2px]          /* إعدادات الـ Light Mode: أوضح وأقوى */
+               dark:opacity-[0.25] dark:grayscale-[0%] dark:contrast-[1] dark:blur-[4px]" /* إعدادات الـ Dark Mode اللي عجبتك */
+    style={{
+      backgroundImage: `url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000&auto=format&fit=crop')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed',
+    }}
+  />
+  
+  {/* طبقة حماية للنصوص: شفافة أكتر في الفاتح عشان الصورة تبان */}
+  <div className="absolute inset-0 
+                  bg-white/40 
+                  dark:bg-transparent 
+                  bg-gradient-to-b from-white/10 via-transparent to-white/20" />
+</div>
+
+ 
+      {/*  الأصلي مع إضافة كلاسات التنسيق */}
+      <div className="p-6 max-w-7xl mx-auto space-y-12 relative z-10">
 
       {/* ── Hero ── */}
       <div className="rounded-2xl bg-gradient-to-bl from-primary/15 via-primary/5 to-background border border-primary/20 p-8">
@@ -82,7 +106,7 @@ export default function Index() {
       </div>
 
       {/* ── About Library ── */}
-      <div id="about" className="rounded-2xl border border-border bg-card p-8">
+      <div className="rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 p-5 space-y-2 hover:bg-white/10 transition-colors">
         <div className="flex items-center gap-3 mb-6">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <Info className="h-5 w-5" />
@@ -91,7 +115,7 @@ export default function Index() {
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {/* Overview */}
-          <div className="rounded-xl bg-accent/40 border border-border p-5 space-y-2">
+          <div className="rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 p-5 space-y-2 hover:bg-white/10 transition-colors">
             <div className="flex items-center gap-2 mb-3">
               <BookOpen className="h-5 w-5 text-primary" />
               <h3 className="font-semibold text-foreground">نظرة عامة</h3>
@@ -101,7 +125,7 @@ export default function Index() {
             </p>
           </div>
           {/* Mission */}
-          <div className="rounded-xl bg-accent/40 border border-border p-5 space-y-2">
+          <div className="rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 p-5 space-y-2 hover:bg-white/10 transition-colors">
             <div className="flex items-center gap-2 mb-3">
               <BookMarked className="h-5 w-5 text-primary" />
               <h3 className="font-semibold text-foreground">رسالة المكتبة</h3>
@@ -111,7 +135,7 @@ export default function Index() {
             </p>
           </div>
           {/* Objectives */}
-          <div className="rounded-xl bg-accent/40 border border-border p-5 space-y-2">
+          <div className="rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 p-5 space-y-2 hover:bg-white/10 transition-colors">
             <div className="flex items-center gap-2 mb-3">
               <Target className="h-5 w-5 text-primary" />
               <h3 className="font-semibold text-foreground">أهداف المكتبة</h3>
@@ -159,7 +183,7 @@ export default function Index() {
                   className="group relative shrink-0 w-56 snap-start"
                 >
                   {/* Rank Badge */}
-                  <div className="absolute -top-2 -right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold shadow-lg">
+                  <div className="absolute -top-3 -right-3 z-10 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-primary-foreground text-sm font-black shadow-lg ring-4 ring-background">
                     {index + 1}
                   </div>
 
@@ -212,7 +236,7 @@ export default function Index() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {LIBRARY_SERVICES.map((service) => (
-            <div key={service.title} className="flex gap-4 rounded-xl border border-border bg-background p-4 hover:border-primary/40 transition-colors">
+            <div key={service.title} className="flex gap-4 rounded-2xl border border-white/5 bg-white/5 p-4 hover:border-primary/40 hover:bg-white/10 backdrop-blur-sm transition-all duration-300">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <service.icon className="h-5 w-5" />
               </div>
@@ -345,6 +369,7 @@ export default function Index() {
         </div>
       </div>
 
-    </div>
+    </div> 
+    </div> 
   );
 }

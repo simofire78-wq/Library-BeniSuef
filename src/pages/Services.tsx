@@ -40,7 +40,7 @@ const MAIN_SERVICES = [
 ];
 
 const ADDITIONAL_SERVICES = [
-  { icon: Search, title: 'البحث الببليوغرافي', desc: 'إعداد قوائم المصادر والمراجع للأبحاث والرسائل' },
+  { icon: Search, title: 'البحث الببليوجرافي', desc: 'إعداد قوائم المصادر والمراجع للأبحاث والرسائل' },
   { icon: FileText, title: 'خدمة الاستنساخ', desc: 'تصوير وطباعة الفصول والمقالات العلمية' },
   { icon: Printer, title: 'خدمة الطباعة', desc: 'طباعة ملفات PDF والوثائق الإلكترونية' },
   { icon: Wifi, title: 'الإنترنت المجاني', desc: 'اتصال واي-فاي مجاني داخل قاعة المكتبة' },
@@ -49,6 +49,16 @@ const ADDITIONAL_SERVICES = [
 export default function Services() {
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-12">
+      <div 
+  className="fixed inset-0 z-0 pointer-events-none opacity-30 dark:opacity-20"
+  style={{
+    backgroundImage: `url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000&auto=format&fit=crop')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+    filter: 'blur(4px) grayscale(30%)' // 👈 إضافة التغبيش وتقليل الألوان شوية
+  }}
+/>
 
       {/* Hero */}
       <div className="rounded-2xl bg-gradient-to-bl from-primary/15 via-primary/5 to-background border border-primary/20 p-8">
