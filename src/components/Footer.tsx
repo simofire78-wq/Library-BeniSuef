@@ -68,7 +68,7 @@ export const Footer = () => {
         {/* الجزء السفلي: الحقوق والجامعة */}
         <div className="border-t border-slate-200 dark:border-slate-800 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm font-bold text-slate-500 flex items-center gap-2 bg-slate-200/50 dark:bg-slate-900 px-4 py-2 rounded-full">
-             مشروع تخرج دفعة 2026 <Heart className="h-4 w-4 text-red-500 fill-red-500 animate-pulse" />
+             مشروع تخرج دفعة 2026 <div className="h-4 w-4 text-red-500 fill-red-500 animate-pulse" />
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-xs font-black uppercase tracking-widest text-slate-400">
             <span>جامعة بني سويف</span>

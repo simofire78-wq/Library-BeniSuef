@@ -107,7 +107,7 @@ export default function Search() {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundAttachment: 'fixed',
-    filter: 'blur(3px) grayscale(30%)' // 👈 إضافة التغبيش وتقليل الألوان شوية
+    filter: 'blur(3px) grayscale(30%)' //  إضافة التغبيش وتقليل الألوان شوية
   }}
 />
       {/* Hero */}
